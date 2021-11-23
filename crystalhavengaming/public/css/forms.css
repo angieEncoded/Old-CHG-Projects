@@ -1,0 +1,62 @@
+
+.chg-form-background{
+  background-color: #212529;
+  border-radius: 4px;
+  -webkit-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57); 
+box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57);
+  }
+
+  .chg-form-wrapper {
+    color:#ced4da;
+    /* background-color: #616161; */
+    border: 1px solid #607D8B;
+    border-radius: 6px;
+    padding: 0.5rem;
+    overflow:hidden; /* button float-end taking it outside the flow... */
+    /* box-shadow: 4px 8px 15px 0px #000000; */
+    -webkit-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57); 
+    box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57);
+}
+/* ---------------FORM CONTROL COLOR OVERRIDES -------------- */
+.chg-form-control {
+    color: #212529;
+    background-color: #ECEFF1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .form-control {
+      transition: none;
+    }
+  }
+  
+  .chg-form-control:focus {
+    color: #212529;
+    background-color: #EDE7F6;
+    border-color:#B39DDB;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #B39DDB;
+  }
+  
+  .chg-form-select {
+    color: #212529;
+    background-color: #ECEFF1;
+  }
+  .chg-form-select:focus {
+    border-color: #B39DDB;
+    box-shadow: 0 0 0 0.25rem #B39DDB;
+  }
+  
+  .chg-form-check-input {
+    background-color: #ECEFF1;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+  }
+  .chg-form-check-input:focus {
+    border-color: #000;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #bacbe6;
+  }
+  .chg-form-check-input:checked {
+    background-color: #5E35B1;
+    border-color: #5E35B1;
+  }
+  
+  

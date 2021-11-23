@@ -1,0 +1,165 @@
+<% layout('layouts/boilerplate') %>
+
+<form action="/events" method="POST" class="validateForm d-inline" novalidate>
+    <div class="row chg-form-background mt-3 mx-1">
+
+
+
+        <div class="col-sm-12 col-md-6 col-lg-6 g-4 mb-5">
+<!-- ---------------------------------------------Simple Form--------------------------------------------------- -->
+            <h1 class="chg-main-font">New Event for "<%= duty.name%>"</h1>
+            <hr class="chg-gray">
+            
+                <input type="hidden" name="_csrf" value="<%= token %>">
+                <input type="hidden" name="event[dutyId]" value=<%= dutyId %>>
+                <!-- ----------------------------------------Leader------------------------------------------------ -->
+                <div class="mb-3">
+                    <label class="form-label chg-color-text-alt" for="leader">Leader</label>
+                    <input class="form-control chg-form-control" type="text" name="event[leader]" id="leader" value="<%= currentUser.discordName %>"  required>
+                    <div class="valid-feedback">Complete</div>
+                </div>
+
+
+                <!-- ---------------------------------------------Title----------------------------------------------------- -->
+                <div class="mb-3">
+                    <label class="form-label chg-color-text-alt" for="name">Event Title</label>
+                    <input class="form-control chg-form-control" type="text" id="name" name="event[name]" placeholder="Ex. Drunken Dungeons" required />
+                    <div class="valid-feedback">Complete</div>
+                </div>
+
+
+        
+                <!-- --------------------------------------------------------Description------------------------------------------------------- -->
+                <label for="editor" class="form-label chg-color-text-alt">Event Description</label>
+                <div class="pell" id="editor" tabindex=0></div>
+                <textarea class="chg-hide" name="event[description]" id="html-output"></textarea>
+
+
+
+
+
+
+                <!-- ------------------------------------------------------------------Date--------------------------------------------------------- -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12">
+                      <div class="mb-3 mt-3">
+                        <label class="form-label chg-color-text-alt" for="date">Event Date:</label>
+                        <input class="form-control chg-form-control" type="date" name="event[date]" id="date"  required>
+                        <div class="valid-feedback">Complete</div>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-0"></div>
+                    </div>
+                </div>
+                
+       
+
+
+                <!-- ---------------------------------------------------------------time-------------------------------------------------------- -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12">
+                      <div class="mb-3">
+                        <label class="form-label chg-color-text-alt" for="number">Time (Server time is EST)</label>
+                        <div class="input-group mb-3">
+
+                            <span class="input-group-text">H:</span>
+                            <input type="number" name="event[hour]"class="form-control chg-form-control" min="1" max="12" value="8" aria-label="Hour">
+      
+                            <span class="input-group-text">M:</span>
+                            <input type="number" name="event[minute]" class="form-control chg-form-control" min="0" max="59" value="00" step="10"  aria-label="Server">
+                                                    
+                            <select class="form-select" name="event[morningOrNight]" id="mornNight">
+                                <option value="am">AM</option>
+                                <option value="pm" selected>PM</option>
+                            </select>
+
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-0"></div>
+                </div>
+        </div>
+
+
+            <!-- ------------------------------------------------ Jobs selection section ----------------------------------------- -->
+        <div class="col-sm-12 col-md-6 col-lg-6 g-4 mb-5">
+            <label class="switch" for="advancedForm">
+                <input type="checkbox" id="advancedForm" />
+                <div class="slider round"></div>
+            </label>
+
+            <h1 class="d-inline chg-main-font" id="jobChange"> Simple roles</h1>
+            <hr class="chg-gray">
+
+            <!-- -------------------------------------------- Simple Roles ------------------------------------------------ -->
+            <div class="row" id="simpleRoles">
+                <input type="hidden" value="1" id="choseSimpleForm" name="event[simpleForm]">
+                <p class="chg-color-text-alt">Adjust as needed below:</p>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><img src="/images/jobs/tank.png" alt="Tank icon"></span>
+                        <input id="tankNumber" type="number"  min="0" max="56" class="form-control chg-form-control" value="<%= duty.defaultRoles.tank %>" aria-label="Tanks" aria-describedby="basic-addon1" name="simpleJob[tank]" required>
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text"><img src="/images/jobs/heal.png" alt="Healer icon"></span>
+                        <input  id="healerNumber" type="number"  min="0" max="56" class="form-control chg-form-control" value="<%= duty.defaultRoles.heal %>" aria-label="Healers" aria-describedby="basic-addon1" name="simpleJob[heal]" required>
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text"><img src="/images/jobs/dps.png" alt="DPS icon"></span>
+                        <input  id="dpsNumber" type="number"  min="0" max="56" class="form-control chg-form-control"  value="<%= duty.defaultRoles.dps %>" aria-label="Dps" aria-describedby="basic-addon1" name="simpleJob[dps]" required>
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text"><img src="/images/jobs/limited.png" alt="Limited Job icon"></span>
+                        <input  id="limitedNumber" type="number"  min="0" max="56" class="form-control chg-form-control"  value="<%= duty.defaultRoles.limited %>" aria-label="Limited" aria-describedby="basic-addon1" name="simpleJob[limited]" required>
+                      </div>
+                </div>
+            </div>
+
+            <!-- -------------------------------------------- Advanced Roles ------------------------------------------------ -->
+            <div id="advancedRoles" style="display:none">
+                <div class="row d-flex">
+                    <p class="chg-color-text-alt">Adjust as needed below:</p>
+                        <% for (let job of jobs) { %>
+                            <div class="col-xl-3 col-lg-4 col-sm-6">
+                                <div class="input-group mb-1">
+                                    <span class="input-group-text"><img src="/images/jobs/<%= job.icon %>" alt="<%= job.icon %>"></span>
+                                    <input type="number"  min="0" max="56" class="form-control chg-form-control" placeholder="0" value="0" aria-label="<%= job.name %>" aria-describedby="basic-addon1" name="advancedJob[<%=job.abbrv%>]" required>
+                                </div>
+                            </div>
+                        <% } %>
+                </div>
+            </div>
+
+            <div class="my-2">
+                <div class="form-check">
+                    <input class="form-check-input chg-form-check-input" type="radio" name="event[autoAccept]" id="manual" value="manual" checked>
+                    <label class="form-check-label chg-color-text-alt" for="manual">Manually control roster</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input chg-form-check-input" type="radio" name="event[autoAccept]" id="automatic" value="automatic">
+                    <label class="form-check-label chg-color-text-alt" for="automatic">Allow automatic signups</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+    <hr class="chg-gray">
+ 
+    <button class='btn chg-btn-primary mb-5'>Submit</button>
+</form>
+
+<a href="/duties" class="btn chg-btn-secondary mb-5">Duties</a>
+<a href="/events" class="btn chg-btn-secondary mb-5">Events</a>
+
+
+
+
+<%- include("../partials/pelljs.ejs")%>
+<%- include("../partials/newEvent.ejs")%>
+<%- include("../partials/validateForms.ejs") %>

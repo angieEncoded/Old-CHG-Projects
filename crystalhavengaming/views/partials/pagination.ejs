@@ -1,0 +1,17 @@
+<!-- ---------------------------------------------------- PAGINATION -------------------------------------------------------->
+         <div class="text-center my-1">
+                <% if (hasPreviousPage) { %>
+                        <a class="btn btn-sm chg-btn-primary" href="?page=<%=previousPage %>" aria-label="Previous">&laquo;</a>
+                <% }  else { %>
+                        <a class="btn btn-sm chg-btn-primary" href="?page=1" aria-label="Previous">&laquo;</a>
+                <% } %>
+       
+                <span class="fw-bold mx-1 chg-pagination-text">Page <%= currentPage %> of <%= lastPage %></span>
+        
+                <% if (hasNextPage) { %>
+                        <a class="btn  btn-sm chg-btn-primary" href="?page=<%= nextPage %>" aria-label="Previous">&raquo;</a>
+                <% }  else { %>
+                        <a class="btn  btn-sm chg-btn-primary" href="?page=<%= lastPage %>" aria-label="Previous">&raquo;</a>
+                <% } %>
+        </div>  
+<!-- ---------------------------------------------------- PAGINATION -------------------------------------------------------->

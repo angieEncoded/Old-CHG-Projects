@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+html {
+  overflow: scroll;
+}
+
+html,
+body {
+  min-height: 100%;
+  background-color: #121212;
+}
+
+.chg-inline-elements{
+  display:inline;
+}
+
+.chg-main-font{
+  color: #7C62B1;
+  font-family: "Staatliches", sans-serif;
+}
+
+
+.darkModeFont{
+  color: #311B92
+}
+
+.darkModeBackground{
+  background-color: #9e9e9e;
+}
+
+.chg-text-background{
+  background-color: #C5CAE9;
+  border-radius: 2px;
+}
+
+.chg-background-color{
+  background-color: #9e9e9e;
+}
+
+.chg-dark-purple-text{
+  color:#673AB7;
+}
+
+.chg-gray{
+  color:#BDBDBD;
+}
+
+.chg-pagination-text{
+  color:#fff;
+}
+.chg-color-text{
+  color:#7C62B1
+}
+.chg-color-text-alt{
+  /* color:#9e9e9e */
+  color:#9575CD;
+}
+
+/* --------------------------- BUTTONS ----------------------------- */
+
+.btn-chg-purple-reverse {
+  border: 2px solid #311B92;
+  color: #311B92;
+  background-color: white;
+}
+
+.btn-chg-purple-reverse:hover {
+  background-color: #311B92;
+  color: white;
+}
+
+.chg-btn-primary {
+  border: 2px solid #311B92;
+  color: #fff;
+  background-color: #311B92;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  -webkit-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57); 
+  box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57);
+}
+
+.chg-btn-primary:hover {
+  border:2px solid #12005e;
+  background-color: #12005e;
+  color: #fff;
+  -webkit-box-shadow: 5px 5px 8px -5px rgba(0,0,0,0.57); 
+  box-shadow: 5px 5px 8px -5px rgba(0,0,0,0.57);
+}
+
+.chg-btn-secondary {
+  border: 2px solid #37474F;
+  color: #fff;
+  background-color: #37474F;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  -webkit-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57); 
+  box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.57);
+}
+
+.chg-btn-secondary:hover{
+  border:2px solid #1c313a;
+  background-color: #1c313a;
+  color: #fff;
+  -webkit-box-shadow: 5px 5px 8px -5px rgba(0,0,0,0.57); 
+  box-shadow: 5px 5px 8px -5px rgba(0,0,0,0.57);
+}
+/* --------------------------- BUTTONS ----------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+a {
+  text-decoration: none !important;
+}
+
+.chg-link {
+  color:#7C62B1;
+}
+
+.chg-link:hover{
+  color: gray
+}
+
+.war, .gnb, .pld, .drk, .tank{
+  color:#002df9;
+}
+
+.whm, .ast, .sch, .heal{
+  color:#2d9618;
+}
+
+.rdm, .mnk, .drg, .nin, .sam,.brd, .mch, .blm, .smn, .dnc, .dps {
+  color:#753333;
+}
+
+
+.chg-code-text {
+  font-family: Consolas,"courier new";
+  color: #000;
+  background-color: #CFD8DC;
+  padding: 1px;
+  font-size: 100%;
+}
+
+
+.chg-hide{
+  display: none;
+}
+
+/* my pseudo table */
+.chg-div-table{
+  padding: 5px;
+  background-color: #CFE2FF;
+  color: #000;
+  border-bottom: thin solid #bacbe6;
+
+}
+
+.chg-div-row{
+  padding: 5px;
+  background-color: #E2E3E5;
+  color: #000;
+  border-bottom: thin solid #cbccce;
+}
+
+.chg-div-row-anchor{
+  text-decoration: none;
+}
+
+.chg-div-row:hover{
+  background-color:#ECECEC
+}
+
+.chg-labels-hidden{
+  visibility: hidden
+}

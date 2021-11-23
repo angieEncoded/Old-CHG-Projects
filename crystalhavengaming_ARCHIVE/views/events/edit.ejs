@@ -1,0 +1,244 @@
+<% layout('layouts/boilerplate') %>
+
+<form action="/events/<%= event.id %>?_method=PUT" method="POST" class="validateForm d-inline" novalidate>
+    <div class="row chg-form-background mt-3 mx-1">
+        <div class="col-sm-12 col-md-6 col-lg-6 g-4 mb-5">
+<!-- ---------------------------------------------Simple Form--------------------------------------------------- -->
+            <h1 class="chg-main-font chg-inline-elements">Edit <%= event.name%> </h1><span class="chg-main-font">(<%=event.duty.name%>)</span>
+            
+            <hr class="chg-gray">
+
+                <input type="hidden" name="event[dutyId]" value=<%= event.dutyId %>>
+                <!-- ----------------------------------------Leader------------------------------------------------ -->
+                <div class="mb-3">
+                    <label class="form-label chg-color-text-alt" for="leader">Leader</label>
+                    <input class="form-control chg-form-control" type="text" name="event[leader]" id="leader" value="<%= event.leader %>" required>
+                    <div class="valid-feedback">Complete</div>
+                </div>
+
+
+                <!-- ---------------------------------------------Title----------------------------------------------------- -->
+                <div class="mb-3">
+                    <label class="form-label chg-color-text-alt" for="name">Event Title</label>
+                    <input class="form-control chg-form-control" type="text" id="name" name="event[name]" placeholder="Ex. Drunken Dungeons"  value="<%= event.name %>" required />
+                    <div class="valid-feedback">Complete</div>
+                </div>
+
+                <!-- --------------------------------------------------------Description------------------------------------------------------- -->
+                <label for="editor" class="form-label chg-color-text-alt">Event Description</label>
+                <div class="pell" id="editor" tabindex="0"></div>
+                <textarea class="chg-hide" name="event[description]" id="html-output"><%= event.description %></textarea>
+               
+
+
+                <!-- ------------------------------------------------------------------Date--------------------------------------------------------- -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12">
+                      <div class="mb-3">
+                        <label class="form-label chg-color-text-alt" for="date">Currently scheduled for: <%= event.date.toString().slice(0, 15)%></label>
+                        <input class="form-control chg-form-control" type="date" name="event[date]" id="date" value="<% event.date %>">
+                        <div class="valid-feedback">Complete</div>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-0"></div>
+                    </div>
+                </div>
+                
+                <!-- ---------------------------------------------------------------time-------------------------------------------------------- -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12">
+                      <div class="mb-3">
+                        <label class="form-label chg-color-text-alt" for="number">Time (Server time is EST)</label>
+                        <div class="input-group mb-3">
+
+                            <span class="input-group-text">H:</span>
+                            <input type="number" name="event[hour]"class="form-control chg-form-control" min="1" max="12" value="<%= hour %>" aria-label="Hour"  required>
+      
+                            <span class="input-group-text">M:</span>
+                            <input type="number" name="event[minute]" class="form-control chg-form-control" min="0" max="59" value="<%= minute %>" step="10"  aria-label="Server"  required>
+                                                    
+                            <select class="form-control chg-form-control" name="event[morningOrNight]" id="mornNight"  required>
+                                <option value="am" <%= event.morningOrNight==="am" ? "selected" : "" %>>AM</option>
+                                <option value="pm" <%= event.morningOrNight === "pm" ? "selected" : "" %>>PM</option>
+                            </select>
+
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-0"></div>
+                </div>
+            </div>
+
+
+        <!-- ------------------------------------------------ Jobs selection section ----------------------------------------- -->
+
+      
+        <div class="col-sm-12 col-md-6 col-lg-6 g-4 mb-5">
+            <% if (event.requestedJobs.tank) { %>
+                <label class="switch" for="advancedForm">
+                    <input type="checkbox" id="advancedForm" />
+                    <div class="slider round"></div>
+                </label>
+    
+                <h1 class="d-inline chg-gray" id="jobChange">Simple roles</h1>
+                <% }  else { %>
+                    <label class="switch" for="advancedForm">
+                        <input type="checkbox" id="advancedForm" checked />
+                        <div class="slider round"></div>
+                    </label>
+                    <h1 class="d-inline chg-gray" id="jobChange">Advanced Roles</h1>
+                <% } %>
+                <hr class="chg-gray">
+
+        <!-- -------------------------------------------- Simple Roles ------------------------------------------------ -->
+            <% if (event.requestedJobs.tank) { %>
+                <div class="row" id="simpleRoles" style="display:block">
+                    <input type="hidden" value="1" id="choseSimpleForm" name="event[simpleForm]">
+                    <p class=" chg-color-text-alt">Adjust as needed below:</p>
+                    <div class="col-lg-4 col-md-6 col-sm-12">    
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/tank.png" alt="Tank icon"></span>
+                            <input id="tankNumber" type="number" min="0" max="56" class="form-control chg-form-control" value="<%= event.requestedJobs.tank ? event.requestedJobs.tank : 0%>" aria-label="Tanks" aria-describedby="basic-addon1" name="simpleJob[tank]" required>
+                          </div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/heal.png" alt="Healer icon"></span>
+                            <input  id="healerNumber" type="number"  min="0" max="56" class="form-control chg-form-control" value="<%= event.requestedJobs.heal ? event.requestedJobs.heal:0 %>" aria-label="Healers" aria-describedby="basic-addon1" name="simpleJob[heal]" required>
+                          </div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/dps.png" alt="DPS icon"></span>
+                            <input  id="dpsNumber" type="number"  min="0" max="56" class="form-control chg-form-control"  value="<%= event.requestedJobs.dps? event.requestedJobs.dps : 0 %>" aria-label="Dps" aria-describedby="basic-addon1" name="simpleJob[dps]" required>
+                          </div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/limited.png" alt="Limited Job icon"></span>
+                            <input  id="limitedNumber" type="number" min="0" max="56"  class="form-control chg-form-control"  value="<%= event.requestedJobs.limited ? event.requestedJobs.limited : 0 %>" aria-label="Limited" aria-describedby="basic-addon1" name="simpleJob[limited]" required>
+                          </div>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="row" id="simpleRoles" style="display:none">
+                    <input type="hidden" value="0" id="choseSimpleForm" name="event[simpleForm]">
+                    <p  class="chg-color-text-alt">Adjust as needed below:</p>
+                    <div class="col-lg-4 col-md-6 col-sm-12">    
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/tank.png" alt="Tank icon"></span>
+                            <input id="tankNumber" type="number"  min="0" max="56" class="form-control chg-form-control" value="0"  aria-label="Tanks" aria-describedby="basic-addon1" name="simpleJob[tank]" required>
+                          </div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/heal.png" alt="Healer icon"></span>
+                            <input  id="healerNumber" type="number"  min="0" max="56" class="form-control chg-form-control" value="0" aria-label="Healers" aria-describedby="basic-addon1" name="simpleJob[heal]" required>
+                          </div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/dps.png" alt="DPS icon"></span>
+                            <input  id="dpsNumber" type="number"  min="0" max="56" class="form-control chg-form-control"  value="0" aria-label="Dps" aria-describedby="basic-addon1" name="simpleJob[dps]" required>
+                          </div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/limited.png" alt="Limited Job icon"></span>
+                            <input  id="limitedNumber" type="number"  min="0" max="56" class="form-control chg-form-control"  value="0" aria-label="Limited" aria-describedby="basic-addon1" name="simpleJob[limited]" required>
+                          </div>
+                    </div>
+                </div>
+            <% } %>
+
+  
+
+        <!-- --------------------------------------------------- Advanced Roles ---------------------------------------------- -->
+            <% if(event.requestedJobs.pld) { %>
+
+                <div id="advancedRoles" style="display:block">
+                    <div class="row d-flex">
+                        <p class="chg-color-text-alt">Adjust as needed below:</p>
+                            <% for (let job in event.requestedJobs) { %>
+                                 <div class="col-xl-3 col-lg-4 col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><img src="/images/jobs/<%= job %>.png" alt="Tank icon"></span>
+                                        <input type="number"  min="0" max="56" class="form-control chg-form-control" placeholder="0" value="<%= event.requestedJobs[job] %>" aria-label="<%= job.name %>" aria-describedby="basic-addon1" name="advancedJob[<%=job%>]"  required>
+                                    </div>
+                                </div>
+                            <% } %>
+                    </div>
+            <% } else {  %>
+                <div id="advancedRoles" style="display:none">
+                    <div class="row d-flex">
+                        <p class=" chg-color-text-alt">Adjust as needed below:</p>
+                            <% for (let job of jobs) { %>
+                                <div class="col-xl-3 col-lg-4 col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><img src="/images/jobs/<%= job.icon %>" alt="<%= job.icon %>"></span>
+                                        <input type="number" min="0" max="56"  class="form-control chg-form-control" placeholder="0" value="0" aria-label="<%= job.name %>" aria-describedby="basic-addon1" name="advancedJob[<%=job.abbrv%>]"  required>
+                                    </div>
+                                </div>
+                            <% } %>
+                    </div>
+                </div>
+            <% }%>
+
+            <div class="my-2">
+                <div class="form-check">
+                    <input class="form-check-input chg-form-check-input" type="radio" name="event[autoAccept]" id="manual" value="manual" <%= event.autoAccept === 'manual' ? "checked" : "" %>>
+                    <label class="form-check-label chg-color-text-alt" for="manual">Manually control roster</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input chg-form-check-input" type="radio" name="event[autoAccept]" id="automatic" value="automatic"  <%= event.autoAccept === 'automatic' ? "checked" : "" %>>
+                    <label class="form-check-label chg-color-text-alt" for="automatic">Allow automatic signups</label>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        </div>
+          
+
+
+
+
+
+        <hr class="chg-gray">
+            <input type="hidden" name="_csrf" value="<%= token %>">
+            <button class='btn chg-btn-primary mb-5'>Submit</button>
+        </form>
+            <a href="/events" class="btn chg-btn-secondary mb-5">Back</a>
+            <a class="btn chg-btn-secondary mb-5" href="#cancelEvent">Cancel Event</a>
+            <a href="#buttons"></a>
+
+
+        <div id="cancelEvent" class="modalDialog">
+                <div>	
+                    <a href="#buttons" title="Close" class="close"><i class="fas fa-times"></i></a>
+                        <p class="fw-bold">Cancellation reason (optional)</p>
+                        <form action="/events/<%= event.id %>?_method=DELETE" method="POST" class="d-inline">
+                            <textarea name="cancellationReason" class="form-control" id="reason" cols="30" rows="5"></textarea>
+                            <input type="hidden" name="_csrf" value="<%= token %>">
+                            <button class="btn chg-btn-secondary mt-1">Cancel Event</button>
+                        </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include("../partials/pelljs.ejs")%>
+<%- include("../partials/newEvent.ejs")%>
+<%- include("../partials/validateForms.ejs")%>

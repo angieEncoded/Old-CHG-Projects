@@ -1,0 +1,132 @@
+<% layout('layouts/boilerplate') %>
+<% block('head').append('<link rel="stylesheet" type="text/css" href="/css/forms.css">') %>
+
+<div class="chg-form-background  p-1 my-2">
+  <div class="chg-form-wrapper">
+    <form action="/duties?_csrf=<%= token %>" method="POST" class="validateForm d-inline" enctype="multipart/form-data" novalidate>    
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <!------------------------------------ Duty Name ------------------------------------------------>
+        <div class="mb-3">
+          <label class="form-label chg-color-text-alt" for="name">Duty Name</label>
+          <input class="form-control chg-form-control" type="text" id="name" name="duty[name]" placeholder="Ex. The Bowl of Embers" required />
+          <div class="valid-feedback">Complete</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">        
+        <!-- --------------------------------- Content Difficulty ----------------------------------------------->
+        <div class="mb-3">
+          <label class="form-label chg-color-text-alt" for="content_difficulty">Content Difficulty</label>
+          <select class="form-select chg-form-select" aria-label="Difficulty Selection" name="duty[contentDifficulty]">
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard</option>
+            <option value="extreme">Extreme</option>
+            <option value="savage" selected>Savage</option>
+            <option value="ultimate">Ultimate</option>
+            <option value="unreal">Unreal</option>
+          </select>
+        </div></div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <!-- --------------------------------- Expansion --------------------------------------------- -->
+        <div class="mb-3">
+          <label class="form-label chg-color-text-alt" for="duty[expansion]">Expansion</label>
+          <select class="form-select chg-form-select" aria-label="Expansion Selection" name="duty[xpac]">
+            <option value="arr">A Realm Reborn</option>
+            <option value="hw">Heavensward</option>
+            <option value="sb">Stormblood</option>
+            <option value="shb" selected>Shadowbringers</option>
+            <option value="ew">Endwalker</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <!----------------------------------- Number of Players ----------------------------------------------->
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <div class="mb-3">
+              <label class="form-label chg-color-text-alt" for="numberOfPlayers">Number of players</label>
+              <input class="form-control chg-form-control" type="number" min="4" max="56" id="numberOfPlayers" name="duty[numberOfPlayers]" value="8" required />
+              <div class="valid-feedback">Complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <!----------------------------------- Default Jobs Needed ----------------------------------------------->
+        <div class="form-label chg-color-text-alt">Default jobs</div>
+        <label for="tanks" class="chg-hide chg-color-text-alt">Default number of tanks</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><img src="/images/jobs/tank.png" alt="Tank icon"></span>
+            <input type="number" class="form-control chg-form-control"  min="0" max="56" value="2" id="tanks" aria-label="Tanks" name="duty[tank]" required>
+        </div>
+        <label for="healers" class="chg-hide chg-color-text-alt"  >Default number of healers</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><img src="/images/jobs/heal.png" alt="Healer icon"></span>
+            <input type="number" class="form-control chg-form-control"  min="0" max="56" value="2" id="healers"  aria-label="Healers"  name="duty[heal]" required>
+        </div>
+        <label for="dps" class="chg-hide chg-color-text-alt"  >Default number of DPS</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><img src="/images/jobs/dps.png" alt="DPS icon"></span>
+            <input type="number" class="form-control chg-form-control" id="dps" min="0" max="56"  value="4" aria-label="Dps"  name="duty[dps]" required>
+        </div>
+        <label for="limited" class="chg-hide chg-color-text-alt">Default number of limited jobs</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><img src="/images/jobs/limited.png" alt="Limited Job icon"></span>
+            <input type="number" class="form-control chg-form-control" id="limited" min="0" max="56"   value="0" aria-label="Limited"  name="duty[limited]" required>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <!------------------------------------- Duty Description ----------------------------------------------->
+        <div class="mb-3">
+          <label class="form-label chg-color-text-alt" for="description">Description</label>
+          <textarea class="form-control chg-form-control" rows="5" type="text" id="description" name="duty[description]" placeholder="Some data about the duty" required></textarea>
+          <div class="valid-feedback">Complete</div>
+        </div>
+        <!-- --------------------------------- Duty Image --------------------------------------------- -->
+        <div class="mb-3">
+          <label class="form-label chg-color-text-alt" for="image">Upload Image for Duty</label>
+          <input class="form-control chg-form-control" type="file" name="duty[image]" required/>
+          <div class="valid-feedback">Complete</div>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+
+      </div>
+      <div class="col-12 col-lg-6"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+      <!-- --------------------------------- Submit Buttons --------------------------------------------- -->
+        <div class="float-end mb-3">
+          <button class='btn chg-btn-primary'>Submit</button>
+          <a href="/duties" class="btn chg-btn-secondary">Back</a>
+        </div>
+
+      </div>
+
+      
+    </div>
+
+  </form>
+
+
+  </div>
+
+</div>
+
+
+
+</div>
+
+
+    
+  <%- include("../partials/validateForms.ejs")%>

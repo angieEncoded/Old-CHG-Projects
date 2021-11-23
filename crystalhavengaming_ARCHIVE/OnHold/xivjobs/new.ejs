@@ -1,0 +1,95 @@
+<% layout('layouts/boilerplate') %>
+
+
+    <div class="row my-5">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <form action="/xivjobs?_csrf=<%= token %>" method="POST" class="validateForm d-inline" enctype="multipart/form-data" novalidate>
+                
+                <!-- --------------------------------------- JOB NAME ----------------------------------------------- -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Job Name</label>
+                    <input type="text" class="form-control" id="name" name="job[name]" placeholder="ex. Warrior">
+                </div>
+            
+
+
+                <!-- --------------------------------------- JOB ABBREVIATION ----------------------------------------------- -->
+                <div class="mb-3">
+                    <label for="abbrv" class="form-label">Job abbreviation </label>
+                    <input type="text" class="form-control" id="abbrv" name="job[abbrv]" placeholder="war, whm, etc" >
+                </div>  
+
+
+                <!-- --------------------------------------- JOB NAME ----------------------------------------------- -->
+                <div class="mb-3">
+                    <label for="emoji" class="form-label">Job Discord emoji</label>
+                    <input type="text" class="form-control" id="emoji" name="job[emoji]" placeholder="ex. :WarriorFF:">
+                </div>
+
+
+
+
+                <!-- --------------------------------------- JOB TYPE ----------------------------------------------- -->
+                <div class="mb-3">
+                    <label for="type"  class="form-label">Job Type (detailed classification)</label>
+                    <select class="form-select" name="job[type]" id="type">
+                        <option value="tank">Tank</option>
+                        <option value="healer">Healer</option>
+                        <option value="melee">Melee DPS</option>
+                        <option value="prdps">Physical Randged DPS</option>
+                        <option value="mrdps">Magical Ranged DPS</option>
+                        <option value="limited">Limited</option>
+                    </select>
+                </div>
+
+
+                <!-- --------------------------------------- JOB ROLE ----------------------------------------------- -->
+                <div class="mb-3"  class="form-label">
+                    <label for="role">Job Role (Generic matching role)</label>
+                    <select class="form-select" name="job[role]" id="role">
+                        <option value="tank">Tank</option>
+                        <option value="heal">Healer</option>
+                        <option value="dps">DPS</option>
+                        <option value="limited">Limited</option>
+                    </select>
+                </div>
+
+
+
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            
+                <!-- --------------------------------------- JOB IMAGE ----------------------------------------------- -->
+                <div class="mb-3">
+                    <label class="form-label" for="image">32 x 32 Job Icon</label>
+                    <input class="form-control" type="file" name="job[icon]" />
+                </div>
+
+
+        
+                <!-- --------------------------------------------------------Description------------------------------------------------------- -->
+                <div class="mb-3">
+                    <label for="editor" class="form-label">Job Description</label>
+                    <div class="pell" id="editor"></div>
+                    <textarea class="chg-hide" name="job[description]" id="html-output"></textarea>
+                </div>
+        
+        </div>
+    <div class="row">
+
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <button class="btn btn-primary">Submit</button>
+        </form>
+        <a href="/xivjobs" class="btn btn-secondary">Back to Jobs list</a>
+    
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6"></div>
+
+
+    </div>
+
+    </div>
+
+
+
+  <%- include("../partials/pelljs.ejs")%>

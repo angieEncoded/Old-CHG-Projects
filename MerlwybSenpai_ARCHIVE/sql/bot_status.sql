@@ -1,0 +1,12 @@
+CREATE TABLE `bot_status` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`type` TEXT NOT NULL COLLATE 'latin1_swedish_ci',
+	`activity` TEXT NOT NULL COLLATE 'latin1_swedish_ci',
+	`added_by` TEXT NOT NULL COLLATE 'latin1_swedish_ci',
+	`added_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;

@@ -1,0 +1,59 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container mt-3">
+    <form action="/noticeme" class="validateForm d-inline" method="post" novalidate>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 my-1">
+                <input type="text" class="form-control" id="noticeme" name="noticeme[reply]" placeholder="Fetch my slippers" aria-describedby="noticeme" required>
+            </div>
+
+            <div class="col-lg-2 col-md-12 my-1">
+                <input type="hidden" name="_csrf" value="<%= token %>">
+                <button class="btn btn-secondary">Add New Statement</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<hr>
+<h3 class="text-center">Current responses</h3>
+<div class="my-3">
+    <%- include("../partials/pagination.ejs")%>
+</div>
+
+<div class="container mb-5">
+    <% for (let noticeme of noticemes) { %>
+        <form action="/noticeme/<%= noticeme.id %>?_method=PUT" method="POST" class="d-inline validateForm" novalidate>
+        <div class="row">
+
+            <!-- ------------------------------------------- EDIT ------------------------------------ -->
+            <div class="col-lg-8 col-md-12 my-1">
+
+                <input class="form-control" type="text" name="noticeme[reply]" value="<%= noticeme.reply %>" required>
+            </div>
+            <div class="col-lg-4 col-md-12 my-1">
+                <input type="hidden" name="_csrf" value="<%= token %>">
+                <button type="submit" class="btn btn-warning">Submit Edit</button>
+                </form>
+
+                <!-- ------------------------------------ DELETE -------------------------------------------------- -->
+                <form action="/noticeme/<%= noticeme.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <input type="hidden" name="_csrf" value="<%= token %>">
+                    <button class="btn btn-danger">Delete item</button>
+                </form>
+            </div>
+
+
+
+        </div>
+    <% } %>
+
+ 
+
+</div>
+      
+
+
+
+<%- include("../partials/validateForms.ejs") %>

@@ -1,0 +1,116 @@
+<% layout('layouts/boilerplate') %>
+
+        <div class="row mb-3">
+            <!-- -----------------------------------------Event Details Section----------------------------------------- -->
+            <div class="col-lg-6 col-sm-12">
+                <div class="card chg-card-dark">
+                    <img src="<%= imagePath %><%= event.duty.image %>" class="card-img-top" alt="event image">
+
+                    <div class="card-body">
+                        <h5 class="card-title"><%= event.name %></h5>
+                    </div>
+
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item  chg-card-dark"><b>Date: </b><%= event.date.toString().slice(0, 15) %></li>
+                        <li class="list-group-item  chg-card-dark"><b>Time: </b><%= event.time.toString().slice(0, -3) %> <%= event.morningOrNight %> EST</li>
+                        <li class="list-group-item  chg-card-dark"><b>Lead: </b><%= event.leader %></li>
+                        <li class="list-group-item  chg-card-dark"><b>Id: </b><%= event.id %></li>
+                    </ul>
+                    
+
+                    <div class="card-body">
+                        <p class="fw-bold">Run description and rules:</p>
+                        <hr>
+                        <p class="card-text"><%- event.description %></p>
+                        <hr>
+                        <p class="fw-bold">Jobs needed:</p>
+                        <div class="row">
+                            <% for (let item in event.requestedJobs) { %>
+                                <% if(event.requestedJobs[item] > 0) { %>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <p><img src="/images/jobs/<%=item%>.png" alt="<%= item%>"><span class="<%= item %>"> <%= item.toUpperCase() %> </span> : <%= event.requestedJobs[item] %></p>
+                                </div>
+                                <% } %>
+                            <% } %>
+
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="btn chg-btn-primary" href="/events/<%= event.id %>/edit" class="card-link">Edit</a>
+                        <a class="btn chg-btn-secondary" href="/events" class="card-link">All Events</a>
+                        <a class="btn chg-btn-secondary float-end" href="#cancelEvent">Cancel Event</a>
+                        <a href="#buttons"></a>
+            
+            
+                    <div id="cancelEvent" class="modalDialog">
+                            <div>	
+                                <a href="#buttons" title="Close" class="close"><i class="fas fa-times"></i></a>
+                                    <p class="fw-bold">Cancellation reason (optional)</p>
+                                    <form action="/events/<%= event.id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <textarea name="cancellationReason" class="form-control" id="reason" cols="30" rows="5"></textarea>
+                                        <input type="hidden" name="_csrf" value="<%= token %>">
+                                        <button class="btn chg-btn-secondary mt-1">Cancel Event</button>
+                                    </form>
+                            </div>
+                    </div>
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-6 col-sm-12">
+                <div class="card chg-card-dark">
+                    <section  class="m-1">
+                        <h1 class="text-center">How to sign up</h1>
+                        <ul>
+                            <li>Join our <a class="chg-link" href="https://discord.gg/x83zN3dmFF">Discord</a>.</li>
+                            <li> Agree to the rules and make sure that your nickname is set to your in-game name.</li>
+                            <li>Head into the <b>#bot-spam</b> channel to tell Merlwyb you'd like to sign up!</li>
+                        </ul>
+                    </section>
+                    <hr>
+                    <section class="mx-2">
+                        <p>The following command is what we use for these signups: </p>
+                        <p><code class="chg-code-text">~signmeup eventId job</code></p>
+                        <p>Add the jobs you want to sign up with in order of preference like the following:</p>
+                        <p><code class="chg-code-text">~signmeup <%= event.id %> whm war blm</code></p>
+                        <p>To see what events you are signed up for, use the following:</p>
+                        <p><code class="chg-code-text">~myevents</code></p>
+                        <p>To see who is currently signed up for this event, use the following:</p>
+                        <p><code class="chg-code-text">~roster eventId</code><br />
+                        <code class="chg-code-text">ex. ~roster <%= event.id %></code>
+                        </p>
+                        <p>To remove yourself from the roster, use the following</p>
+                        <p>
+                        <code class="chg-code-text">~removeme eventId</code>
+                        <code class="chg-code-text">~removeme <%= event.id %></code>
+                        </p>
+                        <p>When the leader accepts you in the roster, you'll be notified via DM.</p>
+                    </section>
+                    
+                    <hr>
+                    <section class="mx-2">
+                        <h3>NOTES:</h3>
+                        <ul>
+                            <li>You are not guaranteed a place in the event just because you signed up.
+                                <ul>
+                                    <li>Events are wholly at the discretion of the leader(s) of the event.</li>
+                                    <li>Please contact the leader(s) of the EVENT directly with any questions.</li>
+                                </ul>
+                            </li>
+                            <li>All rules as laid down by the leader(s) of the run are to be followed in addition to the rules you agreed to when you joined our discord.</li>
+                        </ul>
+                    </section>
+                </div>  
+            </div>
+         </div>

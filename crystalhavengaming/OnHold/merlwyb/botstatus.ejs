@@ -1,0 +1,72 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container mt-3">
+    <form action="/botstatus" class="validateForm d-inline" method="post" novalidate>
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <select class="form-select" name="status[type]" id="type"  aria-label="Select type">
+                    <option value="PLAYING">Playing</option>
+                    <option value="WATCHING">Watching</option>
+                    <option value="STREAMING">Streaming</option>
+                    <option value="LISTENING">Listening to</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <input type="text" class="form-control" id="status" name="status[activity]" placeholder="Final Fantasy XIV" aria-describedby="status" required>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <input type="hidden" name="_csrf" value="<%= token %>">
+                <button class="btn btn-secondary">Add New Status</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr>
+
+<h3 class="text-center">Existing statuses</h3>
+<div class="my-3">
+    <%- include("../partials/pagination.ejs")%>
+</div>
+
+<div class="container mb-5">
+    <% for (let status of botstatus) { %>
+        <form action="/botstatus/<%= status.id %>?_method=PUT" method="POST" class="d-inline validateForm" novalidate>
+        <div class="row my-1">
+            <div class="col-lg-4 col-md-12">
+
+                    <select class="form-select" name="status[type]" id="type" aria-label="Select type">
+                        <option value="PLAYING" <%= status.type === "PLAYING" ? 'selected' : '' %>>Playing</option>
+                        <option value="WATCHING" <%= status.type === "WATCHING" ? 'selected' : '' %>>Watching</option>
+                        <option value="STREAMING" <%= status.type === "STREAMING" ? 'selected' : '' %>>Streaming</option>
+                        <option value="LISTENING" <%= status.type === "LISTENING" ? 'selected' : '' %>>Listening to</option>
+                    </select>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <input class="form-control" type="text" name="status[activity]" value="<%= status.activity %>" required>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                
+                <input type="hidden" name="_csrf" value="<%= token %>">
+                <button type="submit" class="btn btn-warning">Submit Edit</button>
+        </form>
+
+                <form action="/botstatus/<%= status.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <input type="hidden" name="_csrf" value="<%= token %>">
+                    <button class="btn btn-danger">Delete status</button>
+                </form>
+               
+            </div>
+        </div>
+    <% } %>
+
+
+
+
+</div>
+      
+
+
+
+<%- include("../partials/validateForms.ejs") %>

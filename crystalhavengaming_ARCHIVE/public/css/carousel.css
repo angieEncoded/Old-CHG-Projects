@@ -1,0 +1,27 @@
+
+.chg-carousel-container{
+    position: relative;
+    padding: 1rem;
+    margin: 1rem -.75rem 0;
+    border: solid #311B92;
+    overflow:hidden;
+}
+
+
+.chg-streamer-link{
+    color:#311B92;
+    text-decoration: none;
+    }
+    .chg-streamer-link:hover{
+      color:#7C62B1;
+      text-decoration: none;
+    }
+    
+/* Not sure what this is for */
+@media (min-width: 300px) { 
+    .chg-carousel-img{
+      width: 100%;
+      height: 50vw;
+      object-fit: cover;
+    }
+}

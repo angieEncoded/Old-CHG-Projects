@@ -1,0 +1,134 @@
+
+    <% layout('layouts/boilerplate') %>
+<div class="chg-form-background mt-3 mx-1">
+    <form action="/duties/<%= duty.id %>?_method=PUT&_csrf=<%= token %>" method="POST" class="validateForm d-inline" enctype="multipart/form-data" novalidate>
+
+        <div class="row mx-1">
+            <div class="col-sm-12 col-md-12 col-lg-12 g-4">
+                    <!------------------------------------ Duty Name ------------------------------------------------>
+                    <div class="mb-3">
+                        <label class="form-label chg-color-text-alt" for="name">Duty Name</label>
+                        <input class="form-control chg-form-control" type="text" id="name" name="duty[name]" value="<%= duty.name %>" required />
+                        <div class=" valid-feedback">Complete</div>
+                    </div>
+
+
+                    <!------------------------------------- Duty Description ----------------------------------------------->
+                    <div class="mb-3">
+                        <label class="form-label chg-color-text-alt" for="description">Description</label>
+                        <textarea class="form-control chg-form-control" rows="5" type="text" id="description" name="duty[description]" placeholder="Some data about the duty" required><%= duty.description %></textarea>
+                        <div class="valid-feedback">Complete</div>
+                    </div>
+            </div>
+        </div>
+
+
+        <div class="row mx-1">
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+
+
+                <!----------------------------------- Default Jobs Needed ----------------------------------------------->
+                        <div class="form-label chg-color-text-alt">Default jobs</div>
+                        <label for="tanks" class="chg-hide">Default number of tanks</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/tank.png" alt="Tank icon"></span>
+                            <input type="number" class="form-control chg-form-control"  min="0" max="56" id="tanks" value="<%= duty.defaultRoles.tank %>" aria-label="Tanks" name="duty[tank]" required>
+                        </div>
+                        <label for="healers" class="chg-hide"  >Default number of healers</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/heal.png" alt="Healer icon"></span>
+                            <input type="number" class="form-control chg-form-control"  min="0" max="56"  id="healers" value="<%= duty.defaultRoles.heal %>" aria-label="Healers"  name="duty[heal]" required>
+                        </div>
+                        <label for="dps" class="chg-hide"  >Default number of DPS</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/dps.png" alt="DPS icon"></span>
+                            <input type="number" class="form-control chg-form-control" id="dps" min="0" max="56" value="<%= duty.defaultRoles.dps %>" aria-label="Dps"  name="duty[dps]" required>
+                        </div>
+                        <label for="limited" class="chg-hide">Default number of limited jobs</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><img src="/images/jobs/limited.png" alt="Limited Job icon"></span>
+                            <input type="number" class="form-control chg-form-control" id="limited" min="0" max="56"  value="<%= duty.defaultRoles.limited %>" aria-label="Limited"  name="duty[limited]" required>
+                        </div>
+                    
+
+
+                    <!----------------------------------- Duty Image ----------------------------------------------->
+
+                    <div class="mb-3">
+                        <label class="form-label chg-color-text-alt" for="image">Duty Image</label>
+                        <input class="form-control chg-form-control" type="file" name="duty[image]"/>
+                    </div>
+
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+
+                            <!----------------------------------- Content Difficulty ----------------------------------------------->
+                            <div class="mb-3">
+                                <label class="form-label chg-color-text-alt" for="contentDifficulty">Content Difficulty</label>
+                                <select class="form-select chg-form-select" aria-label="Difficulty Selection" name="duty[contentDifficulty]">
+                                    <option value="normal" <%=duty.contentDifficulty==="normal" ? 'selected' : "" %>>Normal</option>
+                                    <option value="hard" <%=duty.contentDifficulty==="hard" ? 'selected' : "" %>>Hard</option>
+                                    <option value="extreme" <%=duty.contentDifficulty==="extreme" ? 'selected' : "" %>>Extreme</option>
+                                    <option value="savage" <%=duty.contentDifficulty==="savage" ? 'selected' : "" %>>Savage</option>
+                                    <option value="ultimate" <%=duty.contentDifficulty==="ultimate" ? 'selected' : "" %>>Ultimate</option>
+                                    <option value="ultimate" <%=duty.contentDifficulty==="unreal" ? 'selected' : "" %>>Unreal</option>
+                                </select>
+                            </div>
+
+
+
+                            <!----------------------------------- Expansion ----------------------------------------------->
+
+                            <div class="mb-3">
+                                <label class="form-label chg-color-text-alt" for="duty[expansion]">Expansion</label>
+                                <select class="form-select chg-form-select" aria-label="Expansion Selection" name="duty[xpac]">
+                                    <option value="arr" <%=duty.xpac==="arr" ? 'selected' : "" %>>A Realm Reborn</option>
+                                    <option value="hw" <%=duty.xpac==="hw" ? 'selected' : "" %>>Heavensward</option>
+                                    <option value="sb" <%=duty.xpac==="sb" ? 'selected' : "" %>>Stormblood</option>
+                                    <option value="shb" <%=duty.xpac==="shb" ? 'selected' : "" %>>Shadowbringers</option>
+                                    <option value="ew" <%=duty.xpac==="ew" ? 'selected' : "" %>>Endwalker</option>
+                                </select>
+                            </div>
+
+                            <!----------------------------------- Number of Players ----------------------------------------------->
+
+                            <div class="mb-3">
+                                <label class="form-label chg-color-text-alt" for="numberOfPlayers">Number of players</label>
+                                <input class="form-control chg-form-control" type="number" min="4" max="56" id="" name="duty[numberOfPlayers]" placeholder="Ex. 4" value="<%= duty.numberOfPlayers %>" required />
+                                <div class=" valid-feedback">Complete
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <p class=" chg-color-text-alt">Current image:</p>
+                                <img src="/uploads/dutyImages/<%= duty.image %>" class="img-fluid" alt="<%= duty.image %>"> <br>
+                            </div>
+
+
+
+
+
+            </div>
+
+        </div>
+    <hr class="chg-gray">
+
+
+  
+    <div class="mb-5 mx-1">
+        <button class='btn chg-btn-primary mb-1'>Submit</button>
+        </form>
+        <a href="/duties" class="btn chg-btn-secondary mb-1">Back</a>
+    <form class="d-inline float-end" action="/duties/<%= duty.id %>?_method=DELETE" method="POST">
+        <button class="btn chg-btn-secondary mb-1">Archive</button>
+        <input type="hidden" name="_csrf" value="<%= token %>">
+    </form>
+    </div>
+</div>
+
+
+
+<%- include("../partials/validateForms.ejs")%>

@@ -1,0 +1,39 @@
+.pell {
+    border: 1px solid rgba(10, 10, 10, 0.1);
+    box-sizing: border-box; 
+}
+
+.pell-content-chg {
+background-color: 
+#ECEFF1;
+box-sizing: border-box;
+height: 300px;
+outline: 0;
+overflow-y: auto;
+padding: 10px; 
+}
+
+.pell-actionbar-chg {
+background-color: #B0BEC5;
+border-bottom: 1px solid rgba(10, 10, 10, 0.1); 
+}
+
+.pell-button-chg {
+background-color: transparent;
+border: none;
+cursor: pointer;
+height: 30px;
+outline: 0;
+width: 30px;
+vertical-align: bottom; 
+}
+
+.pell-button-chg:hover{
+    color:white;
+    background-color:#7C62B1;
+}
+
+
+.pell-button-selected-chg {
+background-color: #7C62B1; 
+}

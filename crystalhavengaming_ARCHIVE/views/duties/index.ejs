@@ -1,0 +1,43 @@
+<% layout('layouts/boilerplate') %>
+<h1 class="chg-main-font text-center">Select a Duty below to create an event</h1>
+  <div class="row mt-3 mb-5 row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+
+    <% for (let duty of duties) { %>
+      <div class="col">
+
+        <div class="card h-100 chg-card-dark ">
+          <div class="chg-card-img-container">
+            <a href="/events/new/<%= duty.id %>">
+              <img class="chg-card-img-top" src="<%= imagePath %><%= duty.image %>" alt="<%= duty.name %>">
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= duty.name %>
+            </h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item  chg-card-dark"><b># of players:</b>
+                <%= duty.numberOfPlayers %>
+              </li>
+              <li class="list-group-item  chg-card-dark"><b>Content difficulty:</b>
+                <%= duty.contentDifficulty %>
+              </li>
+              <li class="list-group-item  chg-card-dark"></li>
+            </ul>
+            <p class="card-text">
+              <%= duty.description %>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/events/new/<%= duty.id %>" class="btn chg-btn-primary">Schedule Event</a>
+            <a href="/duties/<%= duty.id %>/edit" class="btn chg-btn-secondary float-end">Edit Duty</a>
+          </div>
+        </div>
+      </div>
+      <% } %>
+  </div>
+
+  <div class="mb-5">
+    <%- include("../partials/pagination.ejs")%>
+  </div>
