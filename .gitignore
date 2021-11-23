@@ -2,3 +2,8 @@
 dotenv files
 node_modules
 CrystalHaven
+currentTaxWeb.sql
+config.json
+configfull.json
+credentials.json
+token.json
